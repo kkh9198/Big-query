@@ -1,3 +1,5 @@
+#inner 조인 outer조인 
+
 SELECT 
 a.ORDER_DATE,
 b.GENDER,
@@ -8,3 +10,16 @@ FROM `ls-data-literacy-302712.DataLiteracy.oe_orders`  as a
 left join `ls-data-literacy-302712.DataLiteracy.oe_customers` as b on a.CUSTOMER_ID=b.CUSTOMER_ID
 group by a.ORDER_DATE,b.GENDER
 #having count(distinct a.ORDER_ID)<>count(a.ORDER_ID)
+
+
+#cast->강제 형변환,case when then 문
+SELECT  CUSTOMER_ID, 2021-cast(substr(cast(DATE_OF_BIRTH as string),1,4)as INT64)+1  as age,
+case 
+when 2021-cast(substr(cast(DATE_OF_BIRTH as string),1,4)as INT64)+1 <10 then 'age_0'
+when 2021-cast(substr(cast(DATE_OF_BIRTH as string),1,4)as INT64)+1 between 10 and 19 then 'age_10'
+when 2021-cast(substr(cast(DATE_OF_BIRTH as string),1,4)as INT64)+1 between 20 and 29 then 'age_20'
+when 2021-cast(substr(cast(DATE_OF_BIRTH as string),1,4)as INT64)+1 between 30 and 39 then 'age_30'
+when 2021-cast(substr(cast(DATE_OF_BIRTH as string),1,4)as INT64)+1 between 40 and 49 then 'age_40'
+else 'over_50' end as age_type
+
+FROM `ls-data-literacy-302712.DataLiteracy.oe_customers` 
