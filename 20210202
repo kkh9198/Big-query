@@ -1,0 +1,10 @@
+SELECT 
+a.ORDER_DATE,
+b.GENDER,
+sum(a.ORDER_TOTAL) as ord_price,
+count(distinct a.ORDER_ID) as ord,
+count(a.ORDER_ID) as orders
+FROM `ls-data-literacy-302712.DataLiteracy.oe_orders`  as a 
+left join `ls-data-literacy-302712.DataLiteracy.oe_customers` as b on a.CUSTOMER_ID=b.CUSTOMER_ID
+group by a.ORDER_DATE,b.GENDER
+#having count(distinct a.ORDER_ID)<>count(a.ORDER_ID)
